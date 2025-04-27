@@ -6,6 +6,10 @@ endif()
 
 project(QtGuiApp VERSION 1.0 LANGUAGES CXX)
 
+#配置内存泄漏AddressSanitizer 
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -g")
+# set(CMAKE_LINKER_FLAGS "${CMAKE_LINKER_FLAGS} -fsanitize=address")
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_PREFIX_PATH "C:/msys64/mingw64")
 
@@ -18,10 +22,17 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)  # 静态库输出�
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)  # 动态库输出到 lib 目录
 
 find_package(Qt5 REQUIRED COMPONENTS Widgets)
-# 查找并启用 PkgConfig 模块
-find_package(PkgConfig REQUIRED)
 
-# 添加 src 目录
+# FFMPeg相关模块
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(FFMPEG REQUIRED IMPORTED_TARGET
+  libavformat
+  libavcodec
+  libavutil
+  libswscale
+)
+
+# 添加源文件
 add_executable(QtGuiApp
     src/main.cpp
     src/mainwindow.cpp
@@ -33,12 +44,7 @@ target_link_libraries(QtGuiApp PRIVATE
   Qt5::Widgets
   PkgConfig::FFMPEG
 )
-pkg_check_modules(FFMPEG REQUIRED IMPORTED_TARGET
-  libavformat
-  libavcodec
-  libavutil
-  libswscale
-)
+
 # 防止弹出命令行窗口
 set_target_properties(QtGuiApp PROPERTIES WIN32_EXECUTABLE ON)
 
