@@ -34,7 +34,8 @@ pkg_check_modules(FFMPEG REQUIRED IMPORTED_TARGET
 # 添加log4cpp头文件路径
 include_directories(${CMAKE_SOURCE_DIR}/External/log4cpp-master/include)
 # 设置log4cpp库文件路径
-set(LOG4CPP_LIB ${CMAKE_SOURCE_DIR}/External/log4cpp-master/lib/release/liblog4cpp.dll.a)
+set(LOG4CPP_LIB ${CMAKE_SOURCE_DIR}/External/log4cpp-master/lib/debug/liblog4cpp.dll.a)
+#set(LOG4CPP_LIB ${CMAKE_SOURCE_DIR}/External/log4cpp-master/lib/release/liblog4cpp.dll.a)
 
 # 添加源文件
 add_executable(QtGuiApp

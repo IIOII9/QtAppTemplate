@@ -8,7 +8,7 @@
           "C:/msys64/mingw64/include/c++/14.2.0",
           "C:/msys64/mingw64/include/c++/14.2.0/x86_64-w64-mingw32",
           "C:/msys64/mingw64/include/QtWidgets",
-          "${workspaceFolder}/External/log4cpp-master/include/log4cpp"
+          "${workspaceFolder}/External/log4cpp-master/include"
         ],
         "defines": [
         "_DEBUG",
